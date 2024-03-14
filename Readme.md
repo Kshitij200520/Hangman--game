@@ -67,7 +67,7 @@ case 2: Sorry you've run out of attempts.<br />
         Your score:0<br /> 
  
 PROBLEM RESOLVED<br /> 
-1. Word length..<br /> 
+1. Word length.<br /> 
 2. No of attempt.<br /> 
 3. Score.<br /> 
 4. Previous game score.<br /> 
