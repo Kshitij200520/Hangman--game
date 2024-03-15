@@ -52,6 +52,12 @@ case2:<br />
 Guess:p,e,n,i,l,a<br />
 output: You've guessed the word 'pineapple'!<br />
 your score:1<br />
+PROBLEM FACED:<br /> 
+1. Difficulty level not specified.<br /> 
+2. Hints not shown.<br /> 
+3. previous game score not shown.<br />
+4. Game not restart again.
+
 
 
 
