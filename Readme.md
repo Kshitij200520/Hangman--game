@@ -78,7 +78,23 @@ your score:1<br />
 1. Difficulty level not specified.<br /> 
 2. Hints not shown.<br /> 
 3. previous game score not shown.<br />
-4. Game not restart again.
+4. Game not restart again.<br />
+In version3.0<br />
+**Features**:<br />
+1.GUI with Styling<br />
+2.Category and Difficulty Selection<br />
+3.Game Initialization<br />
+4.Hint Feature<br />
+**Test cases**<br />
+case1:<br />
+Guess:e,g,d,n,m,y,x,h,q<br />
+output:Sorry,you've run out of attempts.The word was 'orange'<br />
+your score:0<br />
+case2:<br />
+guess:e,g,a,r,p<br />
+output:You've guessed the word 'grape'!.<br />
+your score:1<br />
+   
 
 
 
