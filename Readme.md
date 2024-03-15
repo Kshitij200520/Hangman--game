@@ -42,6 +42,18 @@ output:-Sorry you've run out of attempts<br />
 Case 2:<br /> 
 Guess:-p,x,a,u,e,l<br /> 
 Output:-you've guessed the word 'apple'.<br /> 
+In version 2.0<br />
+Test cases<br />
+case1:<br />
+Guess:t,v,d,e,j,s,w<br />
+output: Sorry you've run out of attempts.The word was 'strawberry'<br />
+Your score:0<br />
+case2:<br />
+Guess:p,e,n,i,l,a<br />
+output: You've guessed the word 'pineapple'!<br />
+your score:1<br />
+
+
 
 
  
