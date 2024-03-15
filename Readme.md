@@ -42,6 +42,11 @@ output:-Sorry you've run out of attempts<br />
 Case 2:<br /> 
 Guess:-p,x,a,u,e,l<br /> 
 Output:-you've guessed the word 'apple'.<br /> 
+Features<br /> 
+1.GUI Interface<br /> 
+2.Canvas<br /> 
+3.Displaying the Word <br /> 
+4.Restarting the Game<br /> 
 In version 2.0<br />
 Test cases<br />
 case1:<br />
