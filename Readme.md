@@ -34,6 +34,16 @@ Testing should be conducted to identify and fix any bugs or issues before releas
 Tests by tester:-<br /> 
 
 In version1.0 <br /> 
+Features<br /> 
+1.GUI Interface<br /> 
+2.Canvas<br /> 
+3.Displaying the Word <br /> 
+4.Restarting the Game<br /> 
+Problem Faced:<br /> 
+1.No coloring.<br /> 
+2.No word selection.<br /> 
+3.No input entry and guess button.<br /> 
+
 Test cases:<br /> 
 Case 1:<br /> 
 Guess:-x,v,w,b,n,j,s,e,l<br /> 
@@ -42,12 +52,21 @@ output:-Sorry you've run out of attempts<br />
 Case 2:<br /> 
 Guess:-p,x,a,u,e,l<br /> 
 Output:-you've guessed the word 'apple'.<br /> 
-Features<br /> 
-1.GUI Interface<br /> 
-2.Canvas<br /> 
-3.Displaying the Word <br /> 
-4.Restarting the Game<br /> 
+
 In version 2.0<br />
+
+Features:<br />
+1.Title and Styling<br />
+2.Word Selection<br />
+3.Input Entry and Guess Button<br />
+4.Repeated Guess Handling<br />
+
+PROBLEM FACED:<br /> 
+1. Difficulty level not specified.<br /> 
+2. Hints not shown.<br /> 
+3. previous game score not shown.<br />
+4. Game not restart again.
+
 Test cases<br />
 case1:<br />
 Guess:t,v,d,e,j,s,w<br />
@@ -56,12 +75,7 @@ Your score:0<br />
 case2:<br />
 Guess:p,e,n,i,l,a<br />
 output: You've guessed the word 'pineapple'!<br />
-your score:1<br />
-PROBLEM FACED:<br /> 
-1. Difficulty level not specified.<br /> 
-2. Hints not shown.<br /> 
-3. previous game score not shown.<br />
-4. Game not restart again.
+your score:1<br />   
 
 
 
