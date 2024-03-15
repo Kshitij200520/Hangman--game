@@ -48,31 +48,7 @@ PROBLEM FACED:<br />
 2. Not creative display add more features.<br /> 
 3. Not displaying no of attempts  and length of words.<br /> 
 
-In  version 2.0 -<br /> 
-case 1:-you've guessed the word 'grape'.<br /> 
- Your score:1<br /> 
-case 2:- Sorry you've run out of attempts.<br /> 
-        The word was 'grape'<br /> 
-        Your score:0<br /> 
-PROBLEM FACED:<br /> 
-1. Difficulty level not specified.<br /> 
-2. Hints not shown.<br /> 
-3. previous game score not shown.<br /> 
-
-In Version 3.0 (Final project)<br /> 
-case 1: you've guessed the word 'grape'.<br /> 
- Your score:1<br /> 
-case 2: Sorry you've run out of attempts.<br /> 
-        The word was 'grape'<br /> 
-        Your score:0<br /> 
  
-PROBLEM RESOLVED<br /> 
-1. Word length.<br /> 
-2. No of attempt.<br /> 
-3. Score.<br /> 
-4. Previous game score.<br /> 
-5. Difficulty level.<br /> 
-6. Hints.<br /> 
 
 Hangman is not only a fun game but can also be educational, helping players improve their vocabulary and spelling skills. It's a popular game for children and adults alike and can be played using pen and paper, on a computer, or through various electronic devices.<br /> 
 
