@@ -43,10 +43,6 @@ Case 2:<br />
 Guess:-p,x,a,u,e,l<br /> 
 Output:-you've guessed the word 'apple'.<br /> 
 
-PROBLEM FACED:<br /> 
-1. Play only once, game is not starting again.<br /> 
-2. Not creative display add more features.<br /> 
-3. Not displaying no of attempts  and length of words.<br /> 
 
  
 
