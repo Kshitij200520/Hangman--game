@@ -1,6 +1,6 @@
-**Project Title: Hangman Game<br />**
+## **Project Title: Hangman Game<br />**
 
-**Description:<br />**
+## Description:<br />
 Hangman is a classic word-guessing game where one player thinks of a word and the other player tries to guess it by suggesting letters. With each incorrect guess, a part of a hangman is drawn. The player must guess the word before the hangman is fully drawn to win.<br /> 
 
 **Team Members:<br />** 
@@ -31,7 +31,7 @@ It's important to ensure that the game is user-friendly and provides clear instr
 Testing should be conducted to identify and fix any bugs or issues before releasing the game to the public. <br /> 
 
 
-**Tests by tester:-** <br /> 
+## **Tests by tester:-** <br /> 
 
 **In version1.0** <br /> 
 **Features**<br /> 
@@ -96,12 +96,7 @@ output:You've guessed the word 'grape'!.<br />
 your score:1<br />
    
 
-
-
-
-
-
- 
+## Conclusion 
 
 Hangman is not only a fun game but can also be educational, helping players improve their vocabulary and spelling skills. It's a popular game for children and adults alike and can be played using pen and paper, on a computer, or through various electronic devices.<br /> 
 
