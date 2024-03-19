@@ -79,12 +79,15 @@ your score:1<br />
 2. Hints not shown.<br /> 
 3. previous game score not shown.<br />
 4. Game not restart again.<br />
-In version3.0<br />
+
+**In version3.0** <br />
+
 **Features**:<br />
 1.GUI with Styling<br />
 2.Category and Difficulty Selection<br />
 3.Game Initialization<br />
 4.Hint Feature<br />
+
 **Test cases**<br />
 case1:<br />
 Guess:e,g,d,n,m,y,x,h,q<br />
