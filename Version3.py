@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox, font
+from tkinter import messagebox
 import random
 
 class HangmanGame:
@@ -29,37 +29,37 @@ class HangmanGame:
         
         self.previous_score = 0
         
-        self.heading_label = tk.Label(self.master, text="HANGMAN GAME", font=("Helvetica", 20, "bold"), bg="#F0F8FF", pady=10)
-        self.heading_label.pack()
-        
-        self.instructions_label = tk.Label(self.master, text="Welcome to Hangman Game! Click 'Instructions' to learn how to play.", font=("Helvetica", 12), bg="#F0F8FF")
-        self.instructions_label.pack()
-        
         self.game_frame = tk.Frame(self.master, bg="#F0F8FF")  # Light blue background
-        self.game_frame.pack(pady=10)
+        self.game_frame.pack(pady=20)
         
-        self.category_label = tk.Label(self.game_frame, text="Select Category:", bg="#F0F8FF", font=("Helvetica", 12), padx=10, pady=5)
-        self.category_label.grid(row=0, column=0)
+        self.game_heading = tk.Label(self.game_frame, text="HANGMAN GAME", bg="#F0F8FF", font=("Helvetica", 20, "bold"), padx=10, pady=5)
+        self.game_heading.grid(row=0, column=0, columnspan=3, sticky="nsew")
+        
+        self.category_label = tk.Label(self.game_frame, text="Select Category:", bg="#F0F8FF", font=("Helvetica", 12))
+        self.category_label.grid(row=1, column=0, sticky="nsew")
         
         self.category_menu = tk.OptionMenu(self.game_frame, self.category, *self.categories)
         self.category_menu.config(bg="#E0FFFF", font=("Helvetica", 10))  # Light cyan background
-        self.category_menu.grid(row=0, column=1)
+        self.category_menu.grid(row=1, column=1, sticky="nsew")
         
-        self.difficulty_label = tk.Label(self.game_frame, text="Select Difficulty:", bg="#F0F8FF", font=("Helvetica", 12), padx=10, pady=5)
-        self.difficulty_label.grid(row=1, column=0)
+        self.difficulty_label = tk.Label(self.game_frame, text="Select Difficulty:", bg="#F0F8FF", font=("Helvetica", 12))
+        self.difficulty_label.grid(row=1, column=2, sticky="nsew")
         
         self.difficulty_menu = tk.OptionMenu(self.game_frame, self.difficulty, *self.words[self.categories[0]].keys())
         self.difficulty_menu.config(bg="#E0FFFF", font=("Helvetica", 10))  # Light cyan background
-        self.difficulty_menu.grid(row=1, column=1)
+        self.difficulty_menu.grid(row=1, column=3, sticky="nsew")
         
-        self.instructions_button = tk.Button(self.game_frame, text="Instructions", command=self.show_instructions, bg="#FFA500", fg="white", font=("Helvetica", 12), padx=10, pady=5)
-        self.instructions_button.grid(row=0, column=2, rowspan=2)
+        self.start_button = tk.Button(self.game_frame, text="Start Game", command=self.start_new_game, bg="#FFA500", fg="white", font=("Helvetica", 12))
+        self.start_button.grid(row=2, column=0, columnspan=4, sticky="nsew", padx=10, pady=5)
         
-        self.restart_button = tk.Button(self.master, text="Restart", command=self.restart_game, bg="#FFA500", fg="white", font=("Helvetica", 12), padx=10, pady=5)
-        self.restart_button.pack()
+        self.instructions_button = tk.Button(self.game_frame, text="Instructions", command=self.show_instructions, bg="#FFA500", fg="white", font=("Helvetica", 12))
+        self.instructions_button.grid(row=3, column=0, columnspan=4, sticky="nsew", padx=10, pady=5)
+        
+        self.hint_button = tk.Button(self.game_frame, text="Hint", command=self.get_hint, bg="#FFA500", fg="white", font=("Helvetica", 12))
+        self.hint_button.grid(row=4, column=0, columnspan=4, sticky="nsew", padx=10, pady=5)
         
         self.previous_score_label = tk.Label(self.game_frame, text=f"Previous Score: {self.previous_score}", bg="#F0F8FF", font=("Helvetica", 12))
-        self.previous_score_label.grid(row=2, column=0, columnspan=3, pady=10)
+        self.previous_score_label.grid(row=5, column=0, columnspan=4, sticky="nsew", padx=10, pady=5)
         
         self.canvas = tk.Canvas(self.master, width=200, height=200, bg="#FFFFFF")  # White background
         self.canvas.pack()
@@ -73,15 +73,30 @@ class HangmanGame:
         self.input_entry = tk.Entry(self.master, font=("Helvetica", 14))
         self.input_entry.pack()
         
-        self.guess_button = tk.Button(self.master, text="Guess", command=self.make_guess, bg="#FFA500", fg="white", font=("Helvetica", 14), padx=10, pady=5)
+        self.guess_button = tk.Button(self.master, text="Guess", command=self.make_guess, bg="#FFA500", fg="white", font=("Helvetica", 14))
         self.guess_button.pack()
         
         self.game_over = False  # Flag to track if the game is over
         self.game_played = False  # Flag to track if the game has been played
         
-        self.start_new_game()
-    
+        self.time_limits = {"Easy": 50, "Medium": 40, "Hard": 30}  # Time limits for each difficulty level
+        self.time_label = tk.Label(self.game_frame, text="", bg="#F0F8FF", font=("Helvetica", 12))
+        self.time_label.grid(row=6, column=0, columnspan=4, sticky="nsew", padx=10, pady=5)
+        self.time_remaining = 0
+        
+        self.timer_running = False  # Flag to track if the timer is running
+        self.timer_id = None
+
     def start_new_game(self):
+        if not self.timer_running:
+            self.start_button.config(state="disabled")
+            self.start_game()
+            self.update_time()
+
+    def start_game(self):
+        self.game_over = False
+        self.game_played = False
+        
         self.word = random.choice(self.words[self.category.get()][self.difficulty.get()])
         self.guessed_letters = []
         self.attempts_left = 6
@@ -89,42 +104,26 @@ class HangmanGame:
         self.draw_hangman(6)
         self.word_label.config(text=self.display_word())
         self.info_label.config(text=f"Length of word: {len(self.word)} | Attempts left: {self.attempts_left}")
-    
-    def draw_hangman(self, attempts_left):
-        self.canvas.delete("all")
-        if attempts_left < 6:
-            self.canvas.create_line(10, 190, 100, 190, width=2)
-        if attempts_left < 5:
-            self.canvas.create_line(55, 190, 55, 10, width=2)
-        if attempts_left < 4:
-            self.canvas.create_line(55, 10, 135, 10, width=2)
-        if attempts_left < 3:
-            self.canvas.create_line(135, 10, 135, 35, width=2)
-        if attempts_left < 2:
-            self.canvas.create_oval(120, 35, 150, 65, width=2)
-        if attempts_left < 1:
-            self.canvas.create_line(135, 65, 135, 110, width=2)
-            self.canvas.create_line(135, 75, 120, 90, width=2)
-            self.canvas.create_line(135, 75, 150, 90, width=2)
-            self.canvas.create_line(135, 110, 120, 125, width=2)
-            self.canvas.create_line(135, 110, 150, 125, width=2)
-    
-    def display_word(self):
-        display = ''
-        for letter in self.word:
-            if letter in self.guessed_letters:
-                display += letter
-            else:
-                display += '_'
-        return display
-    
-    def make_guess(self):
-        if self.game_over:  # Check if the game is over
-            messagebox.showinfo("Game Over", "The game has already ended. Please restart.")
-            return
         
-        if self.game_played:  # Check if the game has been played already
-            messagebox.showinfo("Game Over", "You've already played the game once. Please restart to play again.")
+        self.time_remaining = self.time_limits[self.difficulty.get()]  # Set time limit based on difficulty
+        self.timer_running = True
+
+    def update_time(self):
+        if self.timer_running and not self.game_over:  # Check if the timer is running and the game is not over
+            if self.time_remaining > 0:
+                self.time_label.config(text=f"Time Left: {self.time_remaining} seconds")
+                self.time_remaining -= 1
+                self.timer_id = self.master.after(1000, self.update_time)
+            else:
+                self.timer_running = False
+                self.master.after_cancel(self.timer_id)
+                self.game_over = True
+                messagebox.showinfo("Time's Up", "Sorry, you ran out of time!")
+                self.start_button.config(state="normal")
+
+    def make_guess(self):
+        if not self.timer_running:
+            messagebox.showinfo("Game Over", "Please start a new game.")
             return
         
         guess = self.input_entry.get().lower()
@@ -154,16 +153,23 @@ class HangmanGame:
             self.previous_score_label.config(text=f"Previous Score: {self.previous_score}")
             messagebox.showinfo("Congratulations!", f"You've guessed the word '{self.word}'!\nYour score: {self.previous_score}")
             self.game_played = True  # Set the flag to indicate the game has been played
+            self.timer_running = False
+            self.start_button.config(state="normal")
         
         if self.attempts_left == 0:
             messagebox.showinfo("Game Over", f"Sorry, you've run out of attempts. The word was '{self.word}'.\nYour score: {self.previous_score}")
             self.game_over = True  # Set the flag to indicate the game is over
+            self.timer_running = False
+            self.start_button.config(state="normal")
         
-        self.info_label.config(text=f"Length of word: {len(self.word)} | Attempts left: {self.attempts_left}")
-    
+        if self.game_over:
+            self.master.after_cancel(self.timer_id)  # Stop the timer if the game ends
+        
+        self.info_label.config(text=f"Length of word: {len(self.word)} | Attempts left: {self.attempts_left} | Time Left: {self.time_remaining} seconds")
+
     def get_hint(self):
-        if self.game_over or self.game_played:
-            messagebox.showinfo("Game Over", "You can't get hints now. Please start a new game.")
+        if not self.timer_running:
+            messagebox.showinfo("Game Over", "Please start a new game.")
             return
         
         if not self.guessed_letters:
@@ -179,6 +185,34 @@ class HangmanGame:
         
         self.previous_score -= 1  # Deduct score for using hint
         self.previous_score_label.config(text=f"Previous Score: {self.previous_score}")
+
+    def draw_hangman(self, attempts_left):
+        self.canvas.delete("all")
+        if attempts_left < 6:
+            self.canvas.create_line(10, 190, 100, 190, width=2)
+        if attempts_left < 5:
+            self.canvas.create_line(55, 190, 55, 10, width=2)
+        if attempts_left < 4:
+            self.canvas.create_line(55, 10, 135, 10, width=2)
+        if attempts_left < 3:
+            self.canvas.create_line(135, 10, 135, 35, width=2)
+        if attempts_left < 2:
+            self.canvas.create_oval(120, 35, 150, 65, width=2)
+        if attempts_left < 1:
+            self.canvas.create_line(135, 65, 135, 110, width=2)
+            self.canvas.create_line(135, 75, 120, 90, width=2)
+            self.canvas.create_line(135, 75, 150, 90, width=2)
+            self.canvas.create_line(135, 110, 120, 125, width=2)
+            self.canvas.create_line(135, 110, 150, 125, width=2)
+    
+    def display_word(self):
+        display = ''
+        for letter in self.word:
+            if letter in self.guessed_letters:
+                display += letter
+            else:
+                display += '_ '
+        return display
     
     def show_instructions(self):
         messagebox.showinfo("Instructions",
@@ -186,18 +220,12 @@ class HangmanGame:
                             "Instructions:\n"
                             "1. Select a category of words from the dropdown menu.\n"
                             "2. Select the difficulty level.\n"
-                            "3. Guess letters by typing them in the entry box and pressing 'Guess'.\n"
-                            "4. You have 6 attempts to guess the word correctly.\n"
-                            "5. Use the 'Hint' button to get a hint (score penalty for using hint).\n"
-                            "6. Your previous game score is displayed at the bottom.\n"
-                            "7. Have fun!")
-
-    def restart_game(self):
-        self.game_over = False
-        self.game_played = False
-        self.previous_score = 0
-        self.previous_score_label.config(text=f"Previous Score: {self.previous_score}")
-        self.start_new_game()
+                            "3. Click 'Start Game' to begin playing.\n"
+                            "4. Guess letters by typing them in the entry box and pressing 'Guess'.\n"
+                            "5. You have 6 attempts to guess the word correctly.\n"
+                            "6. Use the 'Hint' button to get a hint (score penalty for using hint).\n"
+                            "7. Your previous game score is displayed at the bottom.\n"
+                            "8. Have fun!")
 
 def main():
     root = tk.Tk()
