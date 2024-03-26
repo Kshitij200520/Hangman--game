@@ -41,11 +41,11 @@ Testing should be conducted to identify and fix any bugs or issues before releas
 4.Restarting the Game<br />
 
 **Test cases:** <br /> 
-Case 1:<br /> 
+**Case 1:**<br /> 
 Guess:-x,v,w,b,n,j,s,e,l<br /> 
 output:-Sorry you've run out of attempts<br /> 
        The word was 'strawberry'.<br /> 
-Case 2:<br /> 
+**Case 2:**<br /> 
 Guess:-p,x,a,u,e,l<br /> 
 Output:-you've guessed the word 'apple'.<br /> 
 
