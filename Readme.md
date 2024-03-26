@@ -64,11 +64,11 @@ Output:-you've guessed the word 'apple'.<br />
 4.Repeated Guess Handling<br />
 
 **Test cases** <br />
-case1:<br />
+**case1:**<br />
 Guess:t,v,d,e,j,s,w<br />
 output: Sorry you've run out of attempts.The word was 'strawberry'<br />
 Your score:0<br />
-case2:<br />
+**case2:**<br />
 Guess:p,e,n,i,l,a<br />
 output: You've guessed the word 'pineapple'!<br />
 your score:1<br />   
@@ -89,11 +89,11 @@ your score:1<br />
 4.Hint Feature<br />
 
 **Test cases**<br />
-case1:<br />
+**case1:**<br />
 Guess:e,g,d,n,m,y,x,h,q<br />
 output:Sorry,you've run out of attempts.The word was 'orange'<br />
 your score:0<br />
-case2:<br />
+**case2:**<br />
 guess:e,g,a,r,p<br />
 output:You've guessed the word 'grape'!.<br />
 your score:1<br />
